@@ -1,0 +1,43 @@
+Components
+    |
+    --- Client
+        |
+        --- CategoriesList (Card component)
+        	   |
+    	  	   --- ProductList (Card component)
+			    |
+    	  	   	    --- ProductsDetails (add/remove to cart)
+        |
+        --- Shopping Cart
+        	   |
+    	  	   --- Shipping
+        	   |
+    	  	   --- Payment
+        	   |
+    	  	   --- Place Order
+        |
+        --- My Orders
+        	   |
+    	  	   --- Order Details
+
+    |
+    --- Owner (admin)
+    	  |
+    	  --- ProductsAmb (list whre you can remove)
+        	   |
+    	  	   --- Product Details (edit/add)
+    	  |
+    	  --- ClientsAbm (list whre you can remove)
+
+        	   |
+    	  	   --- Client Details (edit/add)
+    |
+    --- Login
+    	  |
+    	  --- Log in
+    	  |
+    	  --- Sign in
+    |
+    --- Shared
+	  |
+	  --- Search
