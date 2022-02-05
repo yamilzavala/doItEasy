@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import "./homepage.styles.scss";
 
-const HomePage = (props) => { 
+const HomePage = (props) => {
   return (
     <div className="homepage">
       {/* <Link to={`/itemlist`}>Go to list items</Link> */}
