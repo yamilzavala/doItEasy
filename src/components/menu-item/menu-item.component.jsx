@@ -1,8 +1,12 @@
 import React from "react";
-import './menu-item.styles.scss'
+import './menu-item.styles.scss';
+import { withRouter } from 'react-router-dom'
 
-const MenuItem = ({title, imageUrl, size}) => (
-  <div className={`${size} menu-item`}>
+//this component receives (by props) the url of the target category list 
+//clicking on the category, redirect to list of products of the target category
+
+const MenuItem = ({title, imageUrl, size, history, linkUrl}) => (
+  <div className={`${size} menu-item`} onClick={() => history.push(`${linkUrl}`)}>
     <div className='background-image' style={{backgroundImage: `url(${imageUrl})`}}/>
     <div className="content">
       <div className="title">{title.toUpperCase()}</div>
@@ -11,4 +15,4 @@ const MenuItem = ({title, imageUrl, size}) => (
   </div>
 );
 
-export default MenuItem;
+export default withRouter(MenuItem);
