@@ -9,7 +9,6 @@ const ShopPage = (props) => {
 
   return (
     <div className="shop-page">
-        shop
         {
             state.map(({id, ...otherCollectionProps}) => (
                 <CollectionPreview key={id} {...otherCollectionProps}/>
