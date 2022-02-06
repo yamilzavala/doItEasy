@@ -5,7 +5,7 @@ import CollectionPreview from '../../components/collection-preview/collection-pr
 const ShopPage = (props) => {
   const [state, setState] = useState(SHOP_DATA);
 
-    console.log(state)
+  //const [...sections] = state; 
 
   return (
     <div className="shop-page">
