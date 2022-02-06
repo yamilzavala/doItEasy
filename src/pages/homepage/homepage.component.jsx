@@ -9,7 +9,7 @@ const HomePage = (props) => {
     <div className="homepage">
       {/* <Link to={`/itemlist`}>Go to list items</Link> */}
 
-      <h1>Ecommerce</h1>
+      <h1>Store</h1>
       <Directory />
     </div>
   );
