@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './sign-in.styles.scss';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
+import {signInWithGoogle, signInWithGoogleRedirect} from '../../firebase/firebase.util'
 
 const initialState = {
     email: '',
@@ -43,7 +44,11 @@ const SignIn = () => {
                 label='password'
                 required/>
 
-                <CustomButton type="submit">Sign In</CustomButton>
+                <div className="buttons">
+                    <CustomButton type="submit">Sign In</CustomButton>
+                    <CustomButton onClick={signInWithGoogle} isGoogleSignIn>{' '} Sign In with Google {' '}</CustomButton>
+                    {/* <CustomButton onClick={signInWithGoogleRedirect}>{' '} Sign In with Google {' '}</CustomButton> */}
+                </div>
             </form>
 
         </div>

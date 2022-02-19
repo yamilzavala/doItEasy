@@ -34,9 +34,9 @@ Components
     |
     --- Login
     	  |
-    	  --- Log in
+    	  --- Sing in
     	  |
-    	  --- Sign in
+    	  --- Sign up
     |
     --- Shared
 	  |
