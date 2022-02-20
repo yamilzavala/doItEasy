@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState } from 'react';
 import './sign-up.styles.scss';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 import { auth, createUserProfileDocument} from '../../firebase/firebase.util';
+import { withRouter } from 'react-router-dom';
 
 const inistialState = {
     displayName: '',
@@ -11,9 +12,8 @@ const inistialState = {
     confirmPassword: ''
 }
 
-const SignUp = () => {
-    const [state, setState] = useState(inistialState);
-
+const SignUp = (props) => {
+    const [state, setState] = useState(inistialState);  
     const handleChange = (event) => {
         const {value, name } = event.target;
         setState({...state, [name]:value})
@@ -21,8 +21,8 @@ const SignUp = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();    
-        const {displayName} = state;
-        
+        const {displayName} = state;        
+
         if(state.password !== state.confirmPassword){
             alert("password don't match")
             return;
@@ -30,12 +30,13 @@ const SignUp = () => {
 
         try {
             const {user} = await auth.createUserWithEmailAndPassword(state.email, state.password);
-            await createUserProfileDocument(user, {displayName})
+            await createUserProfileDocument(user, {displayName});
+            setState(inistialState);
+            props.history.push('/');
         } catch(error) {
+            alert('Error sing up')
             console.log(error)
-        }
-
-        setState(inistialState);
+        }        
     }
 
     return(
@@ -81,4 +82,4 @@ const SignUp = () => {
     )
 }
 
-export default SignUp;
+export default withRouter(SignUp);

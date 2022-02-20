@@ -2,19 +2,27 @@ import React, {useState} from 'react';
 import './sign-in.styles.scss';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
-import {signInWithGoogle, signInWithGoogleRedirect} from '../../firebase/firebase.util'
+import {signInWithGoogle, signInWithGoogleRedirect, auth} from '../../firebase/firebase.util'
+import { withRouter } from 'react-router-dom';
 
 const initialState = {
     email: '',
     password: ''
 }
 
-const SignIn = () => {
+const SignIn = (props) => {
     const [state, setState] = useState(initialState);
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        setState(initialState)
+        try {
+            await auth.signInWithEmailAndPassword(state.email, state.password)
+            setState(initialState);
+            props.history.push('/');
+        } catch(error) {
+            alert('Error sing in')
+            console.log(error)
+        }        
     }
 
     const handleChange = (event) => {
@@ -55,4 +63,4 @@ const SignIn = () => {
     )
 }
 
-export default SignIn;
+export default withRouter(SignIn);
