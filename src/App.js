@@ -5,7 +5,7 @@ import ShopPage from './pages/shop/shop.component'
 import { Route, Switch } from 'react-router-dom';
 import Header from './components/header/header.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
-import { auth } from './firebase/firebase.util'
+import { auth, createUserProfileDocument } from './firebase/firebase.util'
 // import Details from './components/test-components/details/details.component'
 // import ItemList from './components/test-components/item-list/itemlist.component'
 
@@ -23,9 +23,21 @@ function App() {
   let unsubscriptionFromAuth = null;
 
   useEffect(() => {
-    unsubscriptionFromAuth = auth.onAuthStateChanged(user => {
-      setAuth({currentUser: user})
-      console.log(user)
+    unsubscriptionFromAuth = auth.onAuthStateChanged(async userAuth => {
+      if(userAuth) {
+        const userRef = await createUserProfileDocument(userAuth); //save the user in db and get the referen
+
+        userRef.onSnapshot(snapShot => {//subcribe to the document userAuth in db
+          setAuth({
+            currentUser: {
+            id: snapShot.id,
+            ...snapShot.data()
+            }
+          });
+        });
+      } else {
+        setAuth({currentUser: userAuth});
+      }
     });
 
     //close subscription
@@ -39,9 +51,10 @@ function App() {
     <div className='App'>
         <Header currentUser={authState.currentUser}/>
         <Switch>
-          <Route exact path='/' component={HomePage} />
+          <Route exact path='/' component={HomePage} /> :
           <Route exact  path='/shop' component={ShopPage} />
           <Route exac path='/signin' component={SignInAndSignUpPage} />
+          
           {/* <Route exact  path='/itemlist' component={ItemList} />
           <Route exact  path='/details/:itemId' component={Details} /> */}
         </Switch>
