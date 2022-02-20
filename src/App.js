@@ -25,7 +25,7 @@ function App() {
   useEffect(() => {
     unsubscriptionFromAuth = auth.onAuthStateChanged(async userAuth => {
       if(userAuth) {
-        const userRef = await createUserProfileDocument(userAuth); //save the user in db and get the referen
+        const userRef = await createUserProfileDocument(userAuth); //save the user in db and get the reference
 
         userRef.onSnapshot(snapShot => {//subcribe to the document userAuth in db
           setAuth({
